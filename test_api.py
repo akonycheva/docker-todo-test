@@ -16,7 +16,15 @@ def test_add_task():
     assert response.json()['message'] == 'Task added successfully'
 
 
+def test_delete_task():
+    requests.post(f"{BASE_URL}/tasks", json={"task": "Test delete"})
+    response = requests.delete(f"{BASE_URL}/tasks/1")
+    assert response.status_code == 200
+    assert response.json()['message'] == 'Task deleted'
+
+
 if __name__ == "__main__":
     test_get_tasks()
     test_add_task()
+    test_delete_task()
     print("Tests passed!")

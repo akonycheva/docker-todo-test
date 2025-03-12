@@ -35,5 +35,17 @@ def add_task():
     return jsonify({'message': 'Task added successfully'}), 201
 
 
+@app.route('/tasks/<int:task_id>', methods=['DELETE'])
+def delete_task(task_id):
+    cursor.execute("DELETE FROM tasks WHERE id = %s", (task_id,))
+    conn.commit()
+    return jsonify({'message': 'Task deleted'}), 200
+
+@app.route('/tasks/<int:task_id>', methods=['PUT'])
+def update_task(task_id):
+    task = request.json['task']
+    cursor.execute("UPDATE tasks SET task = %s WHERE id = %s", (task, task_id))
+    conn.commit()
+    return jsonify({'message': 'Task updated'}), 200
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

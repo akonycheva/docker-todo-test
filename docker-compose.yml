@@ -19,5 +19,11 @@ services:
       - pgdata:/var/lib/postgresql/data
     restart: always
 
+  tests:
+    build: .
+    command: python test_api.py
+    depends_on:
+      - backend
+
 volumes:
   pgdata:
