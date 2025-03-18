@@ -21,11 +21,17 @@ This project is a simple web application for managing a list of tasks. It consis
 myapp/
 
 ├── Dockerfile
+
 ├── app.py
+
 ├── requirements.txt
+
 ├── test_api.py
+
 ├── templates/
+
 │   └── index.html
+
 └── docker-compose.yml
 
 ## Building and Running the Application
