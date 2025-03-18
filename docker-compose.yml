@@ -5,10 +5,13 @@ services:
     build: .
     ports:
       - "5000:5000"
+    environment:
+      POSTGRES_DB: todo
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
     depends_on:
       - db
     restart: always
-
   db:
     image: postgres:13
     environment:
@@ -18,6 +21,12 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     restart: always
+
+  tests:
+    build: .
+    command: python test_api.py
+    depends_on:
+      - backend
 
 volumes:
   pgdata:
